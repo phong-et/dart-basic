@@ -1,4 +1,61 @@
 ﻿﻿﻿﻿# dart-basic
+
+# Lesson 11
+* **Knowledge** : *Factory Constructor, Ansyc Await, Dynamic*
+* **Deadline**: *6:00 PM Friday 14th Jun 2019*
+* **Fored Requirements**:
+  - Get latest code from master branch
+  - Alway create a feature with format :feature/L<number>-<name>
+  - Pull request title is "L<number> done
+  - Pull request body is : link screenshot your result
+  - **void main** in L<number>.dart
+* **Đề bài** 
+   - Tạo hàm fetAvenger(url) có cách sử dụng như sau **[1 mark]** : 
+     ```dart
+       Avengers.fetchAvenger(url)
+     ```
+    Hàm mẫu fetAvenger lấy thông tin từ json url
+    ```dart
+          Future<dynamic> fetchAvenger(url) async {
+          try {
+            final response = await http
+                .get(url);
+            if (response.statusCode == 200) {
+              // If server returns an OK response, parse the JSON
+              return JSON.jsonDecode((response.body));
+            } else {
+              // If that response was not OK, throw an error.
+              print('Failed to load post');
+            }
+          } catch (e) {
+            print(e);
+          }
+    ```
+   - Tạo **named factory constructor** có tên và chỉ một tham số: fromURL(String url), type, name, sexual lấy từ url. Cách sử dụng như sau: **[4 marks]**
+     ```dart
+      Thor thor = Avenger.fromURL(urlThor);
+      thor.showInfo()
+     ```
+   - Tạo hàm tạo hàng loạt aveneger thứ tự lần lượt là Thor Thanos Captain America (show info ra console log đúng thứ tự) từ dang sách URL bên dưới(không được đổi thứ tự). Bắt buộc sử dụng lại hàm named factory constructor .fromURL() **[4 marks]**
+      ```dart
+       // don't change position of url in list
+       const List<String> urlAvengers = [
+          'https://blogspotscraping.herokuapp.com/avengers/Thor.json',
+          'https://blogspotscraping.herokuapp.com/avengers/Thanos.json',
+          'https://blogspotscraping.herokuapp.com/avengers/CaptainAmerica.json',
+        ];
+
+        void createAvengers() {
+          // todo
+        }
+
+        void main(){
+          // L11.1 
+
+        }
+      ```
+   - Code đẹp ... **[2 marks]**
+
 # Lesson 10 - Avengers Endgame: Avenger Factory & Captian America fetch Thor's Mjolnir hammer
 * **Knowledge** : *Factory Constructor, Polymorphism(implement, extend)*
 * **Deadline**: *5:00 PM Wednesday 12th Jun 2019*
