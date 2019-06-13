@@ -2,41 +2,41 @@
 
 # Lesson 11
 * **Knowledge** : *Factory Constructor, Ansyc Await, Dynamic*
-* **Deadline**: *6:00 PM Friday 14th Jun 2019*
+* **Deadline**: *6:00 PM Monday 17th Jun 2019*
 * **Fored Requirements**:
-  - Get latest code from master branch
-  - Alway create a feature with format :feature/L<number>-<name>
-  - Pull request title is "L<number> done
-  - Pull request body is : link screenshot your result
-  - **void main** in L<number>.dart
+  - Get latest code from **master** branch
+  - Alway create a feature with format : **feature/L11-name-member**
+  - Pull request title is **L11 done**
+  - Pull request body is link screenshot your result
+  - **void main** in L11.dart
 * **Đề bài** 
-   - Tạo hàm fetAvenger(url) có cách sử dụng như sau **[1 mark]** : 
+   - Tạo hàm fetAvenger(url) có cách sử dụng như sau: 
      ```dart
        Avengers.fetchAvenger(url)
      ```
-    Hàm mẫu fetAvenger lấy thông tin từ json url
-    ```dart
-          Future<dynamic> fetchAvenger(url) async {
-          try {
-            final response = await http
-                .get(url);
-            if (response.statusCode == 200) {
-              // If server returns an OK response, parse the JSON
-              return JSON.jsonDecode((response.body));
-            } else {
-              // If that response was not OK, throw an error.
-              print('Failed to load post');
+     Hàm mẫu fetAvenger lấy thông tin từ json url
+      ```dart
+            Future<dynamic> fetchAvenger(url) async {
+            try {
+              final response = await http
+                  .get(url);
+              if (response.statusCode == 200) {
+                // If server returns an OK response, parse the JSON
+                return JSON.jsonDecode((response.body));
+              } else {
+                // If that response was not OK, throw an error.
+                print('Failed to load post');
+              }
+            } catch (e) {
+              print(e);
             }
-          } catch (e) {
-            print(e);
-          }
-    ```
-   - Tạo **named factory constructor** có tên và chỉ một tham số: fromURL(String url), type, name, sexual lấy từ url. Cách sử dụng như sau: **[4 marks]**
+        ```
+   - Tạo **named factory constructor** có tên và chỉ một tham số: fromURL(String url), name, sexual lấy từ nội dung url, type là tên file json. Cách sử dụng như sau: **[4 marks]**
      ```dart
       Thor thor = Avenger.fromURL(urlThor);
       thor.showInfo()
      ```
-   - Tạo hàm tạo hàng loạt aveneger thứ tự lần lượt là Thor Thanos Captain America (show info ra console log đúng thứ tự) từ dang sách URL bên dưới(không được đổi thứ tự). Bắt buộc sử dụng lại hàm named factory constructor .fromURL() **[4 marks]**
+   - Tạo hàm cho phép tạo hàng loạt aveneger *createAvengers()* thứ tự lần lượt là Thor, Thanos, Captain America (show info ra console log đúng thứ tự) từ danh sách URL bên dưới(chú ý, không được đổi thứ tự url). Bắt buộc sử dụng lại hàm named factory constructor .fromURL() **[4 marks]**
       ```dart
        // don't change position of url in list
        const List<String> urlAvengers = [
@@ -44,15 +44,6 @@
           'https://blogspotscraping.herokuapp.com/avengers/Thanos.json',
           'https://blogspotscraping.herokuapp.com/avengers/CaptainAmerica.json',
         ];
-
-        void createAvengers() {
-          // todo
-        }
-
-        void main(){
-          // L11.1 
-
-        }
       ```
    - Code đẹp ... **[2 marks]**
 
