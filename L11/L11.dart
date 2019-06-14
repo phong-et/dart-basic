@@ -13,15 +13,32 @@ void fetchAvengers() {
 }
 Future<dynamic> createAvengers() async {
   for(final url in urlAvengers){
-     Avenger.fromURL(url);
+     var jsonAvenger = await Avengers.fetchAvenger(url);
+     jsonAvenger = jsonAvenger["Avenger"];
+     String name = jsonAvenger["name"];
+     String sexual = jsonAvenger["sexual"];
+     String type = Avengers.getFileNameFromURL(url);
+     Avenger avenger = Avenger(type: type, name: name, sexual: sexual);
+     avenger.showInfo();
   }
 }
 
 void main() async {
-  //fetchThor().then((onValue) => print(onValue));
+  // =========== Test ===========
   //fetchAvengers();
   //print(Avengers.getFileNameFromURL(urlAvengers[0]));
 
-   //Avenger.fromURL(urlAvengers[0]);
-   createAvengers();
+  // =========== Method 1( use Future then 1st) =========== 
+  // print('============ Named factory constructor ============');
+  // Avenger.fromURL(urlAvengers[2]);
+  // Future.delayed(Duration(seconds: 3), () => {
+  //   print('============ Call Default Factory Constructor Orderly ============'),
+  //   createAvengers()
+  // });
+
+  // =========== Method 2( use Future async await 1st) =========== 
+  print('============ L11.2 - Call Default Factory Constructor Orderly ============');
+  await createAvengers();
+  print('============ L11.1 - Named factory constructor ============');
+  Avenger.fromURL(urlAvengers[2]);
 }
