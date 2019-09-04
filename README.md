@@ -1,18 +1,309 @@
 ﻿﻿﻿﻿# dart-basic
+# Lesson 14
+* **Knowledge** : *Recursive, List, Map, algorithm*
+* **Deadline**: *6:00 PM Tuesday 16th Jul 2019*
+* **Fored Standards**:
+  - Get latest code from **master** branch
+  - Code in L14 folder
+  - Always create a feature with format : **feature/L14-name-member**
+  - Pull request title is **L14 Finish**
+  - Pull request body is link screenshot your result
+  - All code only in L14.dart
 
-# Lesson 11
-* **Knowledge** : *Factory Constructor, Ansyc Await, Dynamic*
-* **Deadline**: *6:00 PM Monday 17th Jun 2019*
+* **Requirements**:
+  Give a json data 
+  ```js
+  List<Map<String, dynamic>> menuList = [
+    { "id": 0, "menuName": "Root", parentId: "#" },
+    { "id": 1, "menuName": "A", parentId: 0 },
+    { "id": 2, "menuName": "B", parentId: 0 },
+    { "id": 3, "menuName": "C", parentId: 5 },
+    { "id": 4, "menuName": "D", parentId: 5 },
+    { "id": 5, "menuName": "E", parentId: 0 },
+    { "id": 6, "menuName": "F", parentId: 5 },
+    { "id": 7, "menuName": "G", parentId: 1 },
+    { "id": 8, "menuName": "H", parentId: 1 },
+    { "id": 9, "menuName": "I", parentId: 6 },
+    { "id": 10, "menuName": "J", parentId: 6 },
+    { "id": 11, "menuName": "K", parentId: 3 },
+    { "id": 12, "menuName": "L", parentId: 3 },
+    { "id": 13, "menuName": "M", parentId: 3 },
+    { "id": 14, "menuName": "N", parentId: 12 },
+    { "id": 15, "menuName": "O", parentId: 12 },
+    { "id": 16, "menuName": "P", parentId: 18 },
+    { "id": 17, "menuName": "Q", parentId: 18 },
+    { "id": 18, "menuName": "R", parentId: 10 },
+    { "id": 19, "menuName": "S", parentId: 10 },
+    { "id": 20, "menuName": "T", parentId: 10 }
+  ]
+  ```
+  - **L14.1**: Convert ***menuList*** to ***menuMap*** [2 marks]
+    ```js
+    function convertListMenuToMapMenu(menuList) {
+      // todo
+    }
+    ```
+  Result :
+    ```js
+    { 
+      "0": { "id": 0, "menuName": "Root"},
+      "1": { "id": 1, "menuName": "A" },
+      "2": { "id": 2, "menuName": "B" },
+      "3": { "id": 3, "menuName": "C" },
+      "4": { "id": 4, "menuName": "D" },
+      "5": { "id": 5, "menuName": "E" },
+      "6": { "id": 6, "menuName": "F" },
+      "7": { "id": 7, "menuName": "G" },
+      "8": { "id": 8, "menuName": "H" },
+      "9": { "id": 9, "menuName": "I" },
+      "10": { "id": 10, "menuName": "J" },
+      "11": { "id": 11, "menuName": "K" },
+      "12": { "id": 12, "menuName": "L" },
+      "13": { "id": 13, "menuName": "M" },
+      "14": { "id": 14, "menuName": "N" },
+      "15": { "id": 15, "menuName": "O" },
+      "16": { "id": 16, "menuName": "P" },
+      "17": { "id": 17, "menuName": "Q" },
+      "18": { "id": 18, "menuName": "R" },
+      "19": { "id": 19, "menuName": "S" },
+      "20": { "id": 20, "menuName": "T" }
+    }
+    ```
+  - **L14.2** : group menu by parentId : [2 marks]
+    ```js
+    function buildGroup(menuList) {
+      // todo
+    }
+    ```
+  Result :
+    ```js
+    {
+      "0": [ 1, 2, 5 ],
+      "1": [ 7, 8 ],
+      "3": [ 11, 12, 13 ],
+      "5": [ 3, 4, 6 ],
+      "6": [ 9, 10 ],
+      "10": [ 18, 19, 20 ],
+      "12": [ 14, 15 ],
+      "18": [ 16, 17 ],
+      "#": [ 0 ] 
+    }
+    ```
+  - **L14.3** : covert this ***javascript*** algorithm to ***dart*** [5 marks]
+      ```js
+        function buildTree(menuMap, parentIdGroups, parentIdRoot) {
+          let currentParentIdGroup = parentIdGroups[parentIdRoot] || []
+          return currentParentIdGroup.map((menuId, menuIdIndex) => {
+              let menuItem = menuMap[menuId];
+              let parentIdNext = parentIdGroups[parentIdRoot][menuIdIndex];
+              let childrenMenuItem = buildTree(menuMap, parentIdGroups, parentIdNext);
+              if (childrenMenuItem.length > 0)
+                  menuItem["children"] = childrenMenuItem;
+              return menuItem;
+          })
+        }
+        (function () {
+            let menuMap = {
+                '0': { id: 0, menuName: 'Root' },
+                '1': { id: 1, menuName: 'A' },
+                '2': { id: 2, menuName: 'B' },
+                '3': { id: 3, menuName: 'C' },
+                '4': { id: 4, menuName: 'D' },
+                '5': { id: 5, menuName: 'E' },
+                '6': { id: 6, menuName: 'F' },
+                '7': { id: 7, menuName: 'G' },
+                '8': { id: 8, menuName: 'H' },
+                '9': { id: 9, menuName: 'I' },
+                '10': { id: 10, menuName: 'J' },
+                '11': { id: 11, menuName: 'K' },
+                '12': { id: 12, menuName: 'L' },
+                '13': { id: 13, menuName: 'M' },
+                '14': { id: 14, menuName: 'N' },
+                '15': { id: 15, menuName: 'O' },
+                '16': { id: 16, menuName: 'P' },
+                '17': { id: 17, menuName: 'Q' },
+                '18': { id: 18, menuName: 'R' },
+                '19': { id: 19, menuName: 'S' },
+                '20': { id: 20, menuName: 'T' }
+            }
+            let parentIdGroups = {
+                '0': [1, 2, 5],
+                '1': [7, 8],
+                '3': [11, 12, 13],
+                '5': [3, 4, 6],
+                '6': [9, 10],
+                '10': [18, 19, 20],
+                '12': [14, 15],
+                '18': [16, 17],
+                '#': [0]
+            }
+            let tree = buildTree(menuMap, parentIdGroups, '#')
+            console.log(JSON.stringify(tree, null, 2))
+      })()
+      ```
+      - **Result**: Run above code by **Nodejs** or **Chrome** to see result
+
+  - **L14.4** : Validate data(menuList) don't loop [1 mark]
+
+# Lesson 13
+* **Knowledge** : *clean code & algorithm*
+* **Deadline**: *6:00 PM Friday 05th Jul 2019*
+* **Fored Requirements**:
+  - Clean your **L12** code & follow the scenario of **main** function [4 marks]
+    ```dart
+    void main(){
+      // L12.1.1 kịch bản tổng đài 1 hàm
+      
+
+      // L12.1.2 kịch bản tổng đài tách hàm 
+
+
+      // L12.2.1 khai báo và sử dụng array số nguyên
+
+
+      // L12.2.2 khai báo và sử dụng ma trận số nguyên bằng List & Map
+
+
+      // L12.2.3 khai báo và sử dụng dữ liệu json tổng hợp(từa lưa kiểu) bằng Map
+
+
+      // L12.3 sắp xếp mảng số nguyên
+
+    
+      // L12.4 tìm kiếm phần tử bất kỳ trong mảng
+
+
+      // L12.5 tìm kiếm nhị phân phần tử bất kỳ trong mảng
+
+    }
+    ```
+  - Create a function convert raw json to nested json [5 marks]
+    - Input raw json
+      ```dart
+      List<Map<String, dynamic>> rawJson = [
+        {"id": 1, "menuName": "A", "parentId": null},
+        {"id": 2, "menuName": "AB", "parentId": 1},
+        {"id": 3, "menuName": "ABC", "parentId": 2},
+        {"id": 4, "menuName": "ABCD", "parentId": 3},
+        {"id": 5, "menuName": "AE", "parentId": 1},
+        {"id": 6, "menuName": "AF", "parentId": 1},
+        {"id": 7, "menuName": "G", "parentId": null},
+        {"id": 8, "menuName": "H", "parentId": null},
+      ]
+      ```
+    - Output nested json 
+      ```dart
+          List<Map<String, dynamic>> nestedJson = [
+            {
+              "id": 1,
+              "menuName": "A",
+              "children": [
+                {
+                  "id": 2,
+                  "menuName": "AB",
+                  "children": [
+                    {
+                      "id": 3,
+                      "menuName": "ABC",
+                      "children":[
+                        {
+                          "id": 4,
+                          "menuName": "ABCD",
+                        }
+                      ]
+                    }               
+                  ]
+                },
+                {
+                  "id": 5,
+                  "menuName": "AE",
+                },
+                {
+                  "id": 6,
+                  "menuName": "AF",
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "menuName": "G",
+            },
+            {
+              "id": 8,
+              "menuName": "H",
+            }
+        ];
+      ```
+  - print pretty console for json data as this screen : http://prntscr.com/o9e825 [1 mark]
+
+# Lesson 12
+* **Knowledge** : *Recursive, List, Map, sort & find algorithm*
+* **Deadline**: *6:00 PM Thursday 27th Jun 2019*
 * **Fored Requirements**:
   - Get latest code from **master** branch
+  - Code in L12 folder
+  - Always create a feature with format : **feature/L12-name-member**
+  - Pull request title is **L12 Finish**
+  - Pull request body is link screenshot your result
+  - All code only in L12.dart
+
+* **Đề bài** 
+  - Mô tả kịch bản tổng đài [3 marks]
+     ```
+     - Nhấn phím 1 : nghe tiếng việt
+     - Nhấn phím 2 : gặp tổng viên
+     - Nhấn phím 3 : để nghe lại
+    ```
+    - Làm tất cả trong một hàm [1 marks]
+    - Sau đó tách  3 hàm [2 marks]
+      - Hàm thủ tục nhập số
+      - Hàm thủ tục in ra menu như trên
+      - Hàm nhận giá trị số nhập vào và trả về một chuỗi có ý nghĩa tương ứng với mô tả trên.
+  - Khai báo & sử dụng array, json [2 marks]
+      - Hãy khai báo một mảng với 5 chữ số tự nhiên bất kỳ(không thứ tự). In ra màn hình giá trị bất kì. Sử dụng 2 cách, dùng biến $ và nối chuỗi thông thường
+      ```
+        // Kết quả màn hình giống nhau nhưng cách dùng khác nhau
+        a[0] = 1
+        a[0] = 1
+      ```
+      - Hãy khai báo một ma trận gồm 5 mảng trên (bắt buộc sử dụng 2 cách Map & List). In ra màn hình giá trị bất kì. Sử dụng 2 cách, dùng biến $ và nối chuỗi thông thường
+        ```
+          List matrixList = ...
+          Map matrixMap = ...
+        ```
+      - Hãy khai báo một biến Map chứa json,bắt buộc để chính xác kiểu dữ liệu. In ra màn hình 1 giá trị bất kì. Sử dụng 2 cách, dùng biến $ và nối chuỗi thông thường
+  
+  - Viết thuật toán sắp sếp mảng 5 chữ số
+    - Hàm có 2 tham số **array** đầu vào & **sortType** 'desc'(giảm dần), 'asc'(tăng dần), giá trị trả về là 1 mảng mới đã sắp xếp [1 mark]
+  - Viết hàm tìm kiếm phần tử bất kỳ trong mảng (có 2 tham số array & giá trị cần tìm,  trả về phần tử tìm được) [1 mark]
+  - Viết hàm tìm kiếm nhị phân phần tử bất kỳ trong mảng (có 2 tham số array & giá trị cần tìm, trả về phần tử tìm được) [2 mark]
+  - Code đẹp, đặt tên hàm tên biến đúng chuẩn ***Camel Case*** ... [1 mark]
+
+# Lesson 11 advanced
+* **Knowledge** : *Default Factory Constructor, Future then, Recursive*
+* **Deadline**: *6:00 PM Friday 21th Jun 2019*
+* **Requirements** 
+  - **L11 advanced**: createAvengers() function without async await, but fetching data is orderly [5 marks]
+  - **L11 clean code** : make your code cleaner [5 marks]
+
+# Lesson 11
+* **Knowledge** : *Factory Constructor(named & default), Future ansyc await, Future then, dynamic*
+* **Deadline**: *6:00 PM Wednesday 19th Jun 2019*
+* **Fored Requirements**:
+  - Get latest code from **master** branch
+  - Code in L11 folder
   - Alway create a feature with format : **feature/L11-name-member**
   - Pull request title is **L11 done**
   - Pull request body is link screenshot your result
-  - **void main** in L11.dart
-* **Đề bài** 
+
+* **Đề bài**   
+    Knowledge : Default Factory Constructor, Future then, Recursive
+    Deadline: 5h:30 PM Friday 21th Jun 2019
+* **Đề bài cơ bản** 
    - Tạo hàm fetAvenger(url) có cách sử dụng như sau: 
      ```dart
-       Avengers.fetchAvenger(url)
+      // In Avenger.dart
+      Avengers.fetchAvenger(url)
      ```
      Hàm mẫu fetAvenger lấy thông tin từ json url
       ```dart
@@ -31,21 +322,35 @@
               print(e);
             }
         ```
-   - Tạo **named factory constructor** có tên và chỉ một tham số: fromURL(String url), name, sexual lấy từ nội dung url, type là tên file json. Cách sử dụng như sau: **[4 marks]**
+   - Tạo ***named factory constructor*** có tính chất như ***default factory constructor*** nhưng chỉ có một tham số ***fromURL(String url)***.  **[3 marks]**
+     Gợi ý thêm :
+     - **name**, **sexual** lấy từ nội dung url, 
+     - **type** là tên file json của url. ví dụ url https://blogspotscraping.herokuapp.com/avengers/Thor.json -> type là 'Thor'
+     - Viết hàm lấy type có cách sử dụng như sau : bắt buộc dùng thuật toán cắt chuỗi.
+     ```dart
+      String type = Avengers.getFileNameFromUrl(url)
+     ```
+     - Cách sử dụng như sau: 
+        - Gọi hàm showInfo trong hàm khởi tạo
+        - Phải dùng hàm ***etchAvenger(url)*** bên trong hàm này
      ```dart
       Thor thor = Avenger.fromURL(urlThor);
-      thor.showInfo()
      ```
-   - Tạo hàm cho phép tạo hàng loạt aveneger *createAvengers()* thứ tự lần lượt là Thor, Thanos, Captain America (show info ra console log đúng thứ tự) từ danh sách URL bên dưới(chú ý, không được đổi thứ tự url). Bắt buộc sử dụng lại hàm named factory constructor .fromURL() **[4 marks]**
+   - Trong file L11.dart, tạo hàm có tên là *createAvengers()* cho phép tạo hàng loạt aveneger show ra info từng avenger đúng thứ tự danh sách URL bên dưới( Thor -> Thanos -> Captain America). **[4 marks]**
+      - Bắt buộc sử dụng lại hàm **default factory constructor** bên trong ***createAvengers()*** 
+      - Bắt buộc sử dụng vòng lặp for
       ```dart
        // don't change position of url in list
+       // In L11.dart
        const List<String> urlAvengers = [
           'https://blogspotscraping.herokuapp.com/avengers/Thor.json',
           'https://blogspotscraping.herokuapp.com/avengers/Thanos.json',
           'https://blogspotscraping.herokuapp.com/avengers/CaptainAmerica.json',
         ];
       ```
-   - Code đẹp ... **[2 marks]**
+   - Code đẹp ... **[3 marks]**
+* **Kết quả** 
+  https://prnt.sc/o1n3wb
 
 # Lesson 10 - Avengers Endgame: Avenger Factory & Captian America fetch Thor's Mjolnir hammer
 * **Knowledge** : *Factory Constructor, Polymorphism(implement, extend)*
