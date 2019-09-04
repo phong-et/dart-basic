@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'L.dart';
 void printJson(jsonData) {
   JsonEncoder encoder = new JsonEncoder.withIndent('  ');
   String prettyPrint = encoder.convert(jsonData);
@@ -119,21 +117,4 @@ void main() {
     // print(tree.values.toList().runtimeType.toString());
     // print(tree.values.toList().toString().runtimeType.toString());
   }
-  
-}
-void test(){
-  List<Map<String, dynamic>> a = [
-    {"id": 0, "menuName": "O", "parentId": '#'},
-    {"id": 1, "menuName": "A", "parentId": 0},
-    {"id": 2, "menuName": "AB", "parentId": 1},
-    {"id": 3, "menuName": "ABC", "parentId": 2},
-    {"id": 4, "menuName": "ABCD", "parentId": 3},
-    {"id": 5, "menuName": "AE", "parentId": 1},
-    {"id": 6, "menuName": "AF", "parentId": 1},
-    {"id": 7, "menuName": "G", "parentId": 0},
-    {"id": 8, "menuName": "H", "parentId": 0},
-  ];
-  print(a.toString());
-  print(a.runtimeType.toString());
-  print(new JsonEncoder.withIndent("    ").convert(a));
 }
